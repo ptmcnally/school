@@ -14,6 +14,5 @@
     <arg name="tab-width" value="4"/>
 
     <rule ref="PSR12"/>
-
 </ruleset>
 
