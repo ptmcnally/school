@@ -5,16 +5,9 @@ import {Head, Link, usePage} from '@inertiajs/vue3';
 import { ref, onMounted } from 'vue';
 
 const currentTime = ref('');
-const loading = ref(false); // Initialize loading state as false
-const page = usePage(); // Get the page props, including query string parameters
+const loading = ref(false);
+const page = usePage(); // Get the page props
 const data = ref(null);
-
-
-onMounted(() => {
-    updateTime();
-    setInterval(updateTime, 1000);
-    fetchTimetableData();
-});
 
 function updateTime() {
     const now = new Date();
@@ -34,7 +27,6 @@ const fetchTimetableData = async () => {
             },
         });
 
-        // Update the data variable with the response data
         data.value = response.data;
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -43,6 +35,12 @@ const fetchTimetableData = async () => {
         loading.value = false;
     }
 };
+
+onMounted(() => {
+    updateTime();
+    setInterval(updateTime, 1000);
+    fetchTimetableData();
+});
 
 </script>
 
@@ -98,7 +96,7 @@ const fetchTimetableData = async () => {
                                         </div>
                                         <!-- If data is null or empty, display a message -->
                                         <div v-else>
-                                            <p v-if="!loading" class="bg-red-50 mt-6">No lessons today.</p>
+                                            <p v-if="!loading" class="bg-red-50 m-6 p-2">No lessons today.</p>
                                         </div>
 
                                         <dl class="-my-3 divide-y divide-gray-100 px-6 py-4 text-sm leading-6">

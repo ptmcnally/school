@@ -7,7 +7,7 @@ import {onMounted, ref} from 'vue';
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 
-const page = usePage(); // Get the page props, including query string parameters
+const page = usePage(); // Get the page props
 const selectedDate = ref(page.props.date || new Date()); // Initialize with the date from the query string or the current date
 const data = ref(null);
 const loading = ref(false); // Initialize loading state as false
@@ -32,7 +32,6 @@ const fetchData = async () => {
 
         window.localStorage.setItem('selectedDate', selectedDate.value);
 
-        // Update the data variable with the response data
         data.value = response.data;
     } catch (error) {
         console.error('Error fetching data:', error);
@@ -75,7 +74,6 @@ onMounted(fetchData);
                             <i class="fas fa-spinner fa-spin"></i> Loading...
                         </div>
 
-                        <!-- Check if data is not null and loop through each item using v-for -->
                         <div v-if="data && data.length > 0">
                             <ol>
                                 <li v-for="(item, index) in data" :key="index" class="shadow-sm sm:rounded-lg relative flex space-x-6 py-6 xl:static bg-gray-300 m-6 pl-4">
@@ -97,7 +95,6 @@ onMounted(fetchData);
                                 </li>
                             </ol>
                         </div>
-                        <!-- If data is null or empty, display a message -->
                         <div v-else>
                             <p v-if="!loading" class="bg-red-50 mt-6">No lessons for the selected date.</p>
                         </div>

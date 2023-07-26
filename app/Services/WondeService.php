@@ -18,6 +18,11 @@ final class WondeService
         $this->schools = $this->client->school(config('wonde.school.id'));
     }
 
+    /**
+     * Load details for a class
+     * @param string $classId
+     * @return array
+     */
     public function getClass(string $classId): array
     {
         $result = $this->schools->classes->get($classId, ['students']);
