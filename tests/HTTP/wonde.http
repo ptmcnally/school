@@ -1,0 +1,50 @@
+# curl https://api.wonde.com/v1.0
+#    -H "Authorization: Bearer 3adf832926714a30e38eddd34dfc587a109bef08"
+
+GET https://api.wonde.com/v1.0
+Authorization: Basic 3adf832926714a30e38eddd34dfc587a109bef08
+###
+
+# Get Schools
+GET https://api.wonde.com/v1.0/schools
+Authorization: Basic 3adf832926714a30e38eddd34dfc587a109bef08
+# Wonde Testing School A1930499544
+###
+
+# Get class (with students)
+GET https://api.wonde.com/v1.0/schools/{{test_school}}/classes/{{test_class}}?include=students
+Authorization: Basic 3adf832926714a30e38eddd34dfc587a109bef08
+### A1472166370
+
+# Get photo
+GET https://api.wonde.com/v1.0/schools/{{test_school}}/photos
+Authorization: Basic 3adf832926714a30e38eddd34dfc587a109bef08
+### Can't implement this: "error_description": "Scope photo.read not enabled"
+
+
+
+# Get all classes with employees *
+GET https://api.wonde.com/v1.0/schools/{{test_school}}/classes?include=employees,lessons&has_students=true
+Authorization: Basic 3adf832926714a30e38eddd34dfc587a109bef08
+###
+
+# Get employees with employment details
+https://api.wonde.com/v1.0/schools/{{test_school}}/employees?include=employment_details
+Authorization: Basic 3adf832926714a30e38eddd34dfc587a109bef08
+#A1725316986 Mr Alistair Pinkney
+###
+
+# Get all classes for a teacher
+GET https://api.wonde.com/v1.0/schools/{{test_school}}/employees/{{test_teacher}}?include=classes,classes.lessons
+Authorization: Basic 3adf832926714a30e38eddd34dfc587a109bef08
+###
+
+# Get all lessons
+GET https://api.wonde.com/v1.0/schools/{{test_school}}/lessons
+Authorization: Basic 3adf832926714a30e38eddd34dfc587a109bef08
+###
+
+# Get all lessons for a date (with employee)
+GET https://api.wonde.com/v1.0/schools/{{test_school}}/lessons?include=employee,class&lessons_start_after=2022-09-05T00:00:00&lessons_start_before=2022-09-05T23:59:59
+Authorization: Basic 3adf832926714a30e38eddd34dfc587a109bef08
+###

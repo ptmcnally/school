@@ -90,5 +90,12 @@ const submit = () => {
                 </PrimaryButton>
             </div>
         </form>
+
+        <div class="bg-gray-300 p-4 mt-4">
+            Log in as a Teacher using: <br>
+            email: teacher@example.com <br>
+            password: <strong>password</strong>
+        </div>
+
     </GuestLayout>
 </template>
