@@ -22,7 +22,6 @@ Authorization: Basic 3adf832926714a30e38eddd34dfc587a109bef08
 ### Can't implement this: "error_description": "Scope photo.read not enabled"
 
 
-
 # Get all classes with employees *
 GET https://api.wonde.com/v1.0/schools/{{test_school}}/classes?include=employees,lessons&has_students=true
 Authorization: Basic 3adf832926714a30e38eddd34dfc587a109bef08

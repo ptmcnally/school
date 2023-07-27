@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\WondeService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class TimetableController extends Controller
 {
@@ -14,14 +15,21 @@ class TimetableController extends Controller
         $date = $request->get('date');
         $userId = $request->get('userId');
 
+        try {
+            $this->validate($request, ['userId' => ['required', 'string']]);
+        } catch (\Exception $exception) {
+            return response()->json($exception->getMessage(), 422);
+        }
+
         $startDate = Carbon::parse($date);
         $startDate->setTime(0,0);
 
+
         $endDate = clone $startDate;
-        $endDate->setTime(23, 58);
+        $endDate->setTime(23, 59, 59);
 
         try {
-            $lessons = $wondeService->getLessons($userId, $startDate, $endDate);
+            $lessons = $wondeService->getLessons($userId, $startDate->toISOString(), $endDate->toISOString());
         } catch (\Exception $exception) {
             return response()->json($exception->getMessage(), $exception->getCode());
         }

@@ -3,11 +3,12 @@
 namespace App\Services;
 
 use Carbon\Carbon;
+use Carbon\Exceptions\InvalidFormatException;
 use Wonde\Client;
 use Wonde\Endpoints\Schools;
 use Wonde\ResultIterator;
 
-final class WondeService
+class WondeService
 {
     protected Schools $schools;
 
@@ -31,19 +32,38 @@ final class WondeService
             'id' => $result->id,
             'name' => $result->name,
             'description' => $result->description,
-            'students' => collect($result->students->data)->sortBy('surname')->values()->toArray()
+            'students' => collect($result->students->data)->map(function ($item) {
+                return [
+                    'id' => $item->id,
+                    'surname' => $item->surname,
+                    'forename' => $item->forename,
+                ];
+            })->sortBy('surname')->values()->toArray()
         ];
     }
 
     /**
      * Get the lessons for a user between the specified dates
      * @param string $userId
-     * @param Carbon $startDate
-     * @param Carbon $endDate
+     * @param string $startDate
+     * @param string $endDate
      * @return array
+     * @throws \Exception
      */
-    public function getLessons(string $userId, Carbon $startDate, Carbon $endDate): array
+    public function getLessons(string $userId, string $startDate, string $endDate): array
     {
+        try {
+            $startDate = Carbon::parse($startDate);
+        } catch (InvalidFormatException) {
+            throw new \Exception('Invalid format for start date');
+        }
+
+        try {
+            $endDate = Carbon::parse($endDate);
+        } catch (InvalidFormatException) {
+            throw new \Exception('Invalid format for end date');
+        }
+
         /* @var ResultIterator $resultIterator */
         $resultIterator = $this->schools->lessons->all(['employee', 'class'],
             [
@@ -73,11 +93,16 @@ final class WondeService
                 'id' => $item->id,
                 'classId' => $item->class->data->id,
                 'className' => $item->class->data->name,
-                'start_date' => $start->format('Y-m-d'),
-                'start_time' => $start->format('H:i'),
-                'end_date' => $end->format('Y-m-d'),
-                'end_time' => $end->format('H:i'),
+                'startDate' => $start->format('Y-m-d'),
+                'startTime' => $start->format('H:i'),
+                'endDate' => $end->format('Y-m-d'),
+                'endTime' => $end->format('H:i'),
             ];
         })->values()->toArray();
+    }
+
+    public function __call($name, $arguments)
+    {
+        return call_user_func_array([$this->client, $name], $arguments);
     }
 }

@@ -27,12 +27,13 @@ Check out the project & run the following commands from the project root.
 
 Navigate to http://127.0.0.1/
 
-Log in with email: "teacher@example.com" / password: "password"
 
 
 # Testing Instructions
 
 ## Dashboard
+
+Log in with email: "teacher@example.com" / password: "password"
 
 Once logged in as a teacher (test account is linked to Alister Pinkey) you will be taken to the teacher's dashboard. The timetable widget should show the lessons for the current day.
 
@@ -50,6 +51,12 @@ You can use the date selector to select the date you would like to see the lesso
 You can view the class details and students list by clicking the class link on each lesson.
 
 To return back to the currently selected day in the timetable you can use the breadcrumbs menu.
+
+### Unit tests
+
+Unit tests can be run using the following command. They are run automatically on this repo using a PHPUnit workflow on push.
+
+`./vendor/bin/phpunit`
 
 ### Notes
 

@@ -78,7 +78,7 @@ onMounted(fetchData);
                             <ol>
                                 <li v-for="(item, index) in data" :key="index" class="shadow-sm sm:rounded-lg relative flex space-x-6 py-6 xl:static bg-gray-300 m-6 pl-4">
                                     <div class="flex-auto">
-                                        <h3 class="pr-10 font-semibold text-gray-900 xl:pr-0">{{ item.start_time }} - {{ item.end_time }}</h3>
+                                        <h3 class="pr-10 font-semibold text-gray-900 xl:pr-0">{{ item.startTime }} - {{ item.endTime }}</h3>
                                         <dl class="mt-2 flex flex-col text-gray-500 xl:flex-row">
                                             <div class="flex space-x-3">
                                                 <dd>

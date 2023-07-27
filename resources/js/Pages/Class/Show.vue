@@ -78,7 +78,7 @@ onMounted(fetchData);
                             <div v-if="data.students && data.students.length > 0">
                                 <h3>Students</h3>
                                 <ol>
-                                    <li v-for="(item, index) in data.students" :key="index" class="shadow-sm sm:rounded-lg relative flex space-x-6 py-6 xl:static bg-gray-300 m-6 pl-4">
+                                    <li v-for="(student, index) in data.students" :key="index" class="shadow-sm sm:rounded-lg relative flex space-x-6 py-6 xl:static bg-gray-300 m-6 pl-4">
                                         <div class="flex-auto">
                                             <h3 class="pr-10 font-semibold text-gray-900 xl:pr-0 pl-4">
                                                 <i class="fas fa-user p-6 bg-gray-50 shadow-sm sm:rounded-lg"></i>
@@ -87,7 +87,7 @@ onMounted(fetchData);
                                             <dl class="mt-2 flex flex-col text-gray-500 xl:flex-row">
                                                 <div class="flex space-x-3">
                                                     <dd>
-                                                        {{ item.surname }}, {{ item.forename }}
+                                                        {{ student.surname }}, {{ student.forename }}
                                                     </dd>
                                                 </div>
                                             </dl>
