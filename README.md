@@ -8,7 +8,7 @@ Requires: Docker, Composer.
 
 ### Running Via Docker
 
-Check out the project & run the following commands from the project root.
+Clone the project & run the following commands from the project root.
 
 `composer install`
 
